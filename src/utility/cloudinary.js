@@ -1,11 +1,12 @@
 const cloudinary = require("cloudinary").v2;
-const { log } = require("console");
 const fs = require("fs");
+const dotenv = require("dotenv");
+dotenv.config();
 
 cloudinary.config({
-  cloud_name: "dg9tlxiix", //process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: "968455127662212", //process.env.CLOUDINARY_API_KEY,
-  api_secret: "gRpBwObcREB3HELI298ojlkJOHY", //process.env.CLOUDINARY_API_SECRET,
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 // need to check why env variables are not working
 
@@ -13,12 +14,7 @@ exports.uploadOnCloudinary = async (localFilePath) => {
   try {
     if (!localFilePath) throw new Error("no local file Path");
     else {
-      // console.log(
-      //   process.env.CLOUDINARY_API_KEY,
-      //   process.env.CLOUDINARY_API_SECRET
-      // );
       const response = await cloudinary.uploader.upload(localFilePath);
-      // console.log(response);
       return response.secure_url;
     }
   } catch (error) {
