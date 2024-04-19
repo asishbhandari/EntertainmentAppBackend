@@ -3,7 +3,8 @@ const dotenv = require("dotenv");
 const authRoutes = require("./src/routes/authRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 const cors = require("cors");
-const multer = require("multer");
+const path = require("path");
+// const multer = require("multer");
 
 const app = express();
 
@@ -15,12 +16,19 @@ app.use(cors());
 // for using environment variables
 dotenv.config();
 
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "working" });
-});
+// app.get("/", (req, res) => {
+//   res.status(200).json({ message: "working" });
+// });
 
 app.use("/v1/auth", authRoutes);
 app.use("/v1/user", userRoutes);
+
+// Serve static files from the 'build' directory
+app.use(express.static(path.join(__dirname, "./public/build")));
+// Serve the React app on all other routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./public/build/index.html"));
+});
 
 app.listen(process?.env?.PORT || 4000, () => {
   console.log(`server is listening on Port ${process?.env?.PORT || 4000}`);
