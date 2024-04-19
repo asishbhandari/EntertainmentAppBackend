@@ -76,9 +76,7 @@ exports.handleGetBookmarkedMedia = async (req, res) => {
   try {
     const bookmarkedMedia = req?.body;
     await connectMongoDb();
-    // getting refrence of the user from database
     const mediaResponse = [];
-    // const result = await UserInfoModal.findOne({ email: user.email });
 
     // Use map to create an array of promises
     const mediaPromises = bookmarkedMedia.map(async (mediaId) => {
