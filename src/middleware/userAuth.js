@@ -7,11 +7,11 @@ const generateToken = (user) => {
     usrname: user.usrName,
     email: user.email,
   };
-  const token = jwt.sign(payload, secret, { expiresIn: "1h" });
+  const token = jwt.sign(payload, secret);
   return token;
 };
 
-const verfiyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
   const token =
     req?.headers?.authorization && req?.headers?.authorization.split(" ")[1];
   if (!token)
@@ -25,4 +25,4 @@ const verfiyToken = (req, res, next) => {
   }
 };
 
-module.exports = { generateToken, verfiyToken };
+module.exports = { generateToken, verifyToken };

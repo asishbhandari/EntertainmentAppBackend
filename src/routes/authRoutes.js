@@ -7,7 +7,6 @@ const router = express.Router();
 
 router.post("/signup", handleUserSignUp);
 router.post("/login", handleUserLogin);
-// new route to update user info
 
 // router.get("/", verfiyToken, (req, res) => {
 //   res.send("/v1 -- route is working");

@@ -74,16 +74,16 @@ exports.handleUserUpdate = async (req, res) => {
 };
 exports.handleGetBookmarkedMedia = async (req, res) => {
   try {
-    const user = req?.user;
+    const bookmarkedMedia = req?.body;
     await connectMongoDb();
     // getting refrence of the user from database
     const mediaResponse = [];
-    const result = await UserInfoModal.findOne({ email: user.email });
+    // const result = await UserInfoModal.findOne({ email: user.email });
 
     // Use map to create an array of promises
-    const mediaPromises = result.bookmarkedMedia.map(async (bookmark) => {
+    const mediaPromises = bookmarkedMedia.map(async (mediaId) => {
       const media = await mediaModal.findOne({
-        mediaId: bookmark.mediaId,
+        mediaId: mediaId,
       });
       return media;
     });
@@ -100,6 +100,7 @@ exports.handleGetBookmarkedMedia = async (req, res) => {
     await disconnectMongoDb();
   }
 };
+
 exports.handleUserBookmark = async (req, res) => {
   try {
     const mediaModalId = req?.mediaModalId;

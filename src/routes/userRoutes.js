@@ -1,5 +1,5 @@
 const express = require("express");
-const { verfiyToken } = require("../middleware/userAuth");
+const { verifyToken } = require("../middleware/userAuth");
 const { handleUserInfo } = require("../controller/handleUserInfo");
 const {
   handleUserUpdate,
@@ -14,14 +14,14 @@ const router = express.Router();
 
 // new route to update user info
 
-router.get("/info", verfiyToken, handleUserInfo);
-router.patch("/update", verfiyToken, handleUserUpdate);
+router.get("/info", verifyToken, handleUserInfo);
+router.patch("/update", verifyToken, handleUserUpdate);
 router.patch(
   "/updatePhoto",
-  verfiyToken,
+  verifyToken,
   upload.single("profilePicture"),
   handleProfilePhoto
 );
-router.post("/bookmark", verfiyToken, handleAddMedia, handleUserBookmark);
-router.get("/bookmarkedMedia", verfiyToken, handleGetBookmarkedMedia);
+router.post("/bookmark", verifyToken, handleAddMedia, handleUserBookmark);
+router.post("/bookmarkedMedia", verifyToken, handleGetBookmarkedMedia);
 module.exports = router;
