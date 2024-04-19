@@ -5,8 +5,10 @@ and APIs required to support the frontend functionality of our entertainment app
 and other backend operations.
 
 ## Features ##
-`RESTful APIs:` Provides a set of RESTful APIs to serve data to the frontend client.
+`RESTful APIs:` Provides a set of RESTful APIs to serve data to the frontend client.  
 `User Authentication:` Supports user authentication and authorization using JSON Web Tokens (JWT).
+
+
 `Data Fetching:` Retrieves and serves entertainment content data including movies, TV shows, and more from the database.
 `Database Integration:` Integrates with a database (e.g., MongoDB) to store and retrieve data.
 `Middleware:` Utilizes middleware functions for request processing, error handling, and more.
