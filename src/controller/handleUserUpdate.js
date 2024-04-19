@@ -74,14 +74,17 @@ exports.handleUserUpdate = async (req, res) => {
 };
 exports.handleGetBookmarkedMedia = async (req, res) => {
   try {
-    const bookmarkedMedia = req?.body;
+    const user = req?.user;
+    // const bookmarkedMedia = req?.body;
     await connectMongoDb();
     const mediaResponse = [];
 
+    const result = await UserInfoModal.findOne({ email: user.email });
+    // console.log(result);
     // Use map to create an array of promises
-    const mediaPromises = bookmarkedMedia.map(async (mediaId) => {
+    const mediaPromises = result.bookmarkedMedia.map(async (bookmark) => {
       const media = await mediaModal.findOne({
-        mediaId: mediaId,
+        mediaId: bookmark.mediaId,
       });
       return media;
     });

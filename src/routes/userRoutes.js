@@ -23,5 +23,5 @@ router.patch(
   handleProfilePhoto
 );
 router.post("/bookmark", verifyToken, handleAddMedia, handleUserBookmark);
-router.post("/bookmarkedMedia", verifyToken, handleGetBookmarkedMedia);
+router.get("/bookmarkedMedia", verifyToken, handleGetBookmarkedMedia);
 module.exports = router;
