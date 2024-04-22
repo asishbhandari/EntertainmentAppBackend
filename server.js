@@ -16,9 +16,9 @@ app.use(cors());
 // for using environment variables
 dotenv.config();
 
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "working" });
-});
+// app.get("/", (req, res) => {
+//   res.status(200).json({ message: "working" });
+// });
 
 app.use("/v1/auth", authRoutes);
 app.use("/v1/user", userRoutes);
