@@ -4,7 +4,7 @@ const secret = "@sish!!123&*aish";
 const generateToken = (user) => {
   const payload = {
     id: user._id,
-    usrname: user.usrName,
+    // usrname: user.usrName,
     email: user.email,
   };
   const token = jwt.sign(payload, secret);

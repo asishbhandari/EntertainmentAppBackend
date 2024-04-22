@@ -16,9 +16,9 @@ app.use(cors());
 // for using environment variables
 dotenv.config();
 
-// app.get("/", (req, res) => {
-//   res.status(200).json({ message: "working" });
-// });
+app.get("/", (req, res) => {
+  res.status(200).json({ message: "working" });
+});
 
 app.use("/v1/auth", authRoutes);
 app.use("/v1/user", userRoutes);
@@ -33,3 +33,5 @@ app.get("*", (req, res) => {
 app.listen(process?.env?.PORT || 4000, () => {
   console.log(`server is listening on Port ${process?.env?.PORT || 4000}`);
 });
+
+module.exports = app;

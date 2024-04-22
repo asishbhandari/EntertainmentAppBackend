@@ -75,7 +75,6 @@ exports.handleUserUpdate = async (req, res) => {
 exports.handleGetBookmarkedMedia = async (req, res) => {
   try {
     const user = req?.user;
-    // const bookmarkedMedia = req?.body;
     await connectMongoDb();
     const mediaResponse = [];
 
@@ -95,6 +94,7 @@ exports.handleGetBookmarkedMedia = async (req, res) => {
     // Add all resolved media to mediaResponse
     mediaResponse.push(...mediaArray);
     res.status(200).json({ mediaResponse: mediaResponse });
+    await disconnectMongoDb();
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ error: "Internal Server Error" });
