@@ -12,14 +12,14 @@ async function connectMongoDb() {
   }
 }
 
-async function disconnectMongoDb() {
-  try {
-    await mongoose.disconnect();
-    console.log("Database Disconnected...");
-  } catch (error) {
-    console.error("Error disconnecting from the database:", error);
-    throw error;
-  }
-}
+// async function disconnectMongoDb() {
+//   try {
+//     await mongoose.disconnect();
+//     console.log("Database Disconnected...");
+//   } catch (error) {
+//     console.error("Error disconnecting from the database:", error);
+//     throw error;
+//   }
+// }
 
-module.exports = { disconnectMongoDb, connectMongoDb };
+module.exports = { connectMongoDb };

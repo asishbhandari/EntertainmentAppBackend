@@ -1,7 +1,7 @@
 const { UserAuthModal } = require("../Modals/userAuthModal");
 const {
   connectMongoDb,
-  disconnectMongoDb,
+  // disconnectMongoDb,
 } = require("../MongoDb/MongoDbConnection");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../middleware/userAuth");
@@ -10,7 +10,7 @@ exports.handleUserLogin = async (req, res) => {
   try {
     const data = req.body;
     // Connect to the database
-    await connectMongoDb();
+    // await connectMongoDb();
 
     // checking if user email already exist
     const isCurrentUser = await UserAuthModal.findOne({ email: data.email });
@@ -32,7 +32,7 @@ exports.handleUserLogin = async (req, res) => {
     }
 
     // Disconnect from the database
-    await disconnectMongoDb();
+    // await disconnectMongoDb();
   } catch (error) {
     console.log("Error in userAuthLogin:", error);
     res.status(500).json({ error: "Internal Server Error" });

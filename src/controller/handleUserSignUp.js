@@ -1,6 +1,6 @@
 const {
   connectMongoDb,
-  disconnectMongoDb,
+  // disconnectMongoDb,
 } = require("../MongoDb/MongoDbConnection");
 const { UserAuthModal } = require("../Modals/userAuthModal");
 const bcrypt = require("bcrypt");
@@ -10,7 +10,7 @@ exports.handleUserSignUp = async (req, res) => {
   try {
     const data = req.body;
     // Connect to the database
-    await connectMongoDb();
+    // await connectMongoDb();
 
     // checking if user email already exist
     const isCurrentUser = await UserAuthModal.findOne({ email: data.email });
@@ -33,7 +33,7 @@ exports.handleUserSignUp = async (req, res) => {
       res.status(200).json({ message: " user Added to database" });
     }
     // Disconnect from the database
-    await disconnectMongoDb();
+    // await disconnectMongoDb();
   } catch (error) {
     console.log("Error in userAuthSignup:", error.message);
     res.status(500).json({ error: "Internal Server Error" });

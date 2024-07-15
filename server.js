@@ -4,6 +4,7 @@ const authRoutes = require("./src/routes/authRoutes");
 const userRoutes = require("./src/routes/userRoutes");
 const cors = require("cors");
 const path = require("path");
+const { connectMongoDb } = require("./src/MongoDb/MongoDbConnection");
 // const multer = require("multer");
 
 const app = express();
@@ -31,6 +32,7 @@ app.get("*", (req, res) => {
 });
 
 app.listen(process?.env?.PORT || 4000, () => {
+  connectMongoDb();
   console.log(`server is listening on Port ${process?.env?.PORT || 4000}`);
 });
 

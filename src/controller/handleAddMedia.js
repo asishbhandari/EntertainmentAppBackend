@@ -1,6 +1,6 @@
 const {
   connectMongoDb,
-  disconnectMongoDb,
+  // disconnectMongoDb,
 } = require("../MongoDb/MongoDbConnection");
 const { mediaModal } = require("../Modals/mediaModal");
 
@@ -8,8 +8,8 @@ exports.handleAddMedia = async (req, res, next) => {
   try {
     const mediaInfo = req.body;
     // console.log(mediaInfo);
-    console.log("handle media k andar", typeof mediaInfo.mediaId);
-    await connectMongoDb();
+    // console.log("handle media k andar", typeof mediaInfo.mediaId);
+    // await connectMongoDb();
     const isMediaAdded = await mediaModal.findOne({
       mediaId: mediaInfo.mediaId,
     });
@@ -39,6 +39,6 @@ exports.handleAddMedia = async (req, res, next) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: " internal Server error" });
-    await disconnectMongoDb();
+    // await disconnectMongoDb();
   }
 };

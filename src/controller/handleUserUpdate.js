@@ -2,13 +2,13 @@ const { mediaModal } = require("../Modals/mediaModal");
 const { UserInfoModal } = require("../Modals/userInfoModal");
 const {
   connectMongoDb,
-  disconnectMongoDb,
+  // disconnectMongoDb,
 } = require("../MongoDb/MongoDbConnection");
 const { uploadOnCloudinary } = require("../utility/cloudinary");
 
 exports.handleProfilePhoto = async (req, res) => {
   try {
-    await connectMongoDb();
+    // await connectMongoDb();
     const user = req?.user;
     const url = await uploadOnCloudinary(req.file.path);
     if (user.email !== req.body.email) {
@@ -27,16 +27,16 @@ exports.handleProfilePhoto = async (req, res) => {
         message: "database Updated",
       });
     }
-    await disconnectMongoDb();
+    // await disconnectMongoDb();
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
-    await disconnectMongoDb();
+    // await disconnectMongoDb();
   }
 };
 
 exports.handleUserUpdate = async (req, res) => {
   try {
-    await connectMongoDb();
+    // await connectMongoDb();
     const user = req?.user;
     const billingAddress = {
       street: req.body.street,
@@ -66,20 +66,19 @@ exports.handleUserUpdate = async (req, res) => {
         message: "database Updated",
       });
     }
-    await disconnectMongoDb();
+    // await disconnectMongoDb();
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
-    await disconnectMongoDb();
+    // await disconnectMongoDb();
   }
 };
 exports.handleGetBookmarkedMedia = async (req, res) => {
   try {
     const user = req?.user;
-    await connectMongoDb();
-    const mediaResponse = [];
+    // await connectMongoDb();
+    // const mediaResponse = [];
 
     const result = await UserInfoModal.findOne({ email: user.email });
-    // console.log(result);
     // Use map to create an array of promises
     const mediaPromises = result.bookmarkedMedia.map(async (bookmark) => {
       const media = await mediaModal.findOne({
@@ -92,13 +91,13 @@ exports.handleGetBookmarkedMedia = async (req, res) => {
     const mediaArray = await Promise.all(mediaPromises);
 
     // Add all resolved media to mediaResponse
-    mediaResponse.push(...mediaArray);
+    const mediaResponse = [...mediaArray];
     res.status(200).json({ mediaResponse: mediaResponse });
-    await disconnectMongoDb();
+    // await disconnectMongoDb();
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ error: "Internal Server Error" });
-    await disconnectMongoDb();
+    // await disconnectMongoDb();
   }
 };
 
@@ -109,7 +108,7 @@ exports.handleUserBookmark = async (req, res) => {
     const mediaId = req?.mediaId;
     const user = req?.user;
 
-    await connectMongoDb();
+    // await connectMongoDb();
     // getting refrence of the user from database
     const result = await UserInfoModal.findOne({ email: user.email });
 
@@ -138,8 +137,10 @@ exports.handleUserBookmark = async (req, res) => {
         mediaId: mediaId,
         type: mediaType,
       });
+      console.log("bookmark added");
     } else {
       result.bookmarkedMedia.splice(isBookmarked, 1);
+      console.log("bookmark removed");
     }
     // save the updated user
     await result.save();
@@ -147,10 +148,10 @@ exports.handleUserBookmark = async (req, res) => {
       bookmarkedMedia: result.bookmarkedMedia,
       message: "database Updated",
     });
-    await disconnectMongoDb();
+    // await disconnectMongoDb();
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ error: "Internal Server Error" });
-    await disconnectMongoDb();
+    // await disconnectMongoDb();
   }
 };
