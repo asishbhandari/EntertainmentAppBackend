@@ -137,10 +137,10 @@ exports.handleUserBookmark = async (req, res) => {
         mediaId: mediaId,
         type: mediaType,
       });
-      console.log("bookmark added");
+      // console.log("bookmark added");
     } else {
       result.bookmarkedMedia.splice(isBookmarked, 1);
-      console.log("bookmark removed");
+      // console.log("bookmark removed");
     }
     // save the updated user
     await result.save();

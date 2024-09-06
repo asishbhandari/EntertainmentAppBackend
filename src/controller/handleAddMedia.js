@@ -18,7 +18,7 @@ exports.handleAddMedia = async (req, res, next) => {
       req.mediaType = isMediaAdded.mediaType;
       req.mediaId = isMediaAdded.mediaId;
       req.mediaPhoto = isMediaAdded.mediaPhoto;
-      console.log("media already exist");
+      // console.log("media already exist");
       next();
     } else {
       const result = await mediaModal.create({
@@ -32,7 +32,7 @@ exports.handleAddMedia = async (req, res, next) => {
       req.mediaType = result.mediaType;
       req.mediaId = result.mediaId;
 
-      console.log("new media added");
+      // console.log("new media added");
       next();
     }
     // await disconnectMongoDb();
